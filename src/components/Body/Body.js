@@ -55,11 +55,18 @@ export function Body() {
   }
 
   function handleDelete(cardId) {
-    console.log("toggled");
     setCards(cards.filter((card) => card.key !== cardId));
   }
 
-  console.log(cards);
+  function createCustomCard(question, answer) {
+    const newCustomCard = {
+      key: uid(),
+      question: question,
+      answer: answer,
+      custom: true,
+    };
+    setCards((prevCards) => [...prevCards, newCustomCard]);
+  }
 
   return (
     <StyledBody>
@@ -67,8 +74,16 @@ export function Body() {
       {pagination === "Main" && (
         <MainPage cards={cards} onDelete={handleDelete} />
       )}
-      {pagination === "Bookmarks" && <Bookmarkspage />}
-      {pagination === "NewCards" && <NewCardsPage />}
+      {pagination === "Bookmarks" && (
+        <Bookmarkspage cards={cards} onDelete={handleDelete} />
+      )}
+      {pagination === "NewCards" && (
+        <NewCardsPage
+          cards={cards}
+          onDelete={handleDelete}
+          createCustomCard={createCustomCard}
+        />
+      )}
       {pagination === "Profile" && (
         <ProfilePage toggleDarkMode={toggleDarkMode} darkMode={darkMode} />
       )}
