@@ -20,12 +20,12 @@ const StyledButton = styled.button`
     if (size === "footericon") {
       return "appearance: none; background-color: inherit";
     }
-  }}
+  }};
 `;
 
-export function Button({ children, size, onClick }) {
+export function Button({ children, size, className, onClick }) {
   return (
-    <StyledButton size={size} onClick={onClick}>
+    <StyledButton size={size} onClick={onClick} className={className}>
       {children}
     </StyledButton>
   );

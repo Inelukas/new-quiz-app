@@ -1,7 +1,13 @@
 import { Body } from "./components/Body/Body";
+import { GlobalStyle } from "./components/GlobalStyle/GlobalStyle";
 
 function App() {
-  return <Body />;
+  return (
+    <>
+      <GlobalStyle />
+      <Body />
+    </>
+  );
 }
 
 export default App;
