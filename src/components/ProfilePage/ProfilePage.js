@@ -139,7 +139,7 @@ const StyledSwitch = styled.label`
   }
 `;
 
-export function ProfilePage({ toggleDarkMode, darkMode }) {
+export function ProfilePage({ toggleDarkMode, darkMode, cards, bookmarked }) {
   return (
     <StyledMain>
       <UpperPart>
@@ -162,11 +162,11 @@ export function ProfilePage({ toggleDarkMode, darkMode }) {
       <CounterPart>
         <Counter>
           <h2 className={"card-number"}>?!</h2>
-          <h2>19</h2>
+          <h2>{cards.length}</h2>
         </Counter>
         <Counter>
           <Image src={bookmarkblack} />
-          <h2>1</h2>
+          <h2>{bookmarked.length}</h2>
         </Counter>
       </CounterPart>
       <Settings>

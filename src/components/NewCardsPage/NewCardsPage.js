@@ -12,7 +12,13 @@ const StyledMain = styled.main`
   height: 100%;
 `;
 
-export function NewCardsPage({ createCustomCard, cards, onDelete }) {
+export function NewCardsPage({
+  createCustomCard,
+  cards,
+  onDelete,
+  onBookmark,
+  bookmarked,
+}) {
   return (
     <StyledMain>
       <Form createCustomCard={createCustomCard} />
@@ -25,6 +31,8 @@ export function NewCardsPage({ createCustomCard, cards, onDelete }) {
             question={card.question}
             answer={card.answer}
             onDelete={onDelete}
+            onBookmark={onBookmark}
+            bookmarked={bookmarked}
           />
         ))}
     </StyledMain>

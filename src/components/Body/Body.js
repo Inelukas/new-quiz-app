@@ -5,7 +5,7 @@ import { MainPage } from "../MainPage/MainPage";
 import { Bookmarkspage } from "../BookmarksPage/Bookmarkspage";
 import { NewCardsPage } from "../NewCardsPage/NewCardsPage";
 import { ProfilePage } from "../ProfilePage/ProfilePage";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { uid } from "uid";
 
 const StyledBody = styled.div`
@@ -17,6 +17,7 @@ export function Body() {
   const [pagination, setPagination] = useState("Main");
   const [darkMode, setDarkMode] = useState(false);
   const [cards, setCards] = useState([]);
+  const [bookmarked, setBookmark] = useState([]);
 
   function handlePagination(prop) {
     setPagination(prop);
@@ -24,6 +25,14 @@ export function Body() {
 
   function toggleDarkMode() {
     setDarkMode(!darkMode);
+  }
+
+  function toggleBookmark(id) {
+    setBookmark((prevBookmarked) =>
+      prevBookmarked.includes(id)
+        ? prevBookmarked.filter((bookmarkId) => bookmarkId !== id)
+        : [...prevBookmarked, id]
+    );
   }
 
   useEffect(() => {
@@ -54,6 +63,11 @@ export function Body() {
     }
   }
 
+  function deleteAll() {
+    setCards([]);
+    setBookmark([]);
+  }
+
   function handleDelete(cardId) {
     setCards(cards.filter((card) => card.key !== cardId));
   }
@@ -70,22 +84,43 @@ export function Body() {
 
   return (
     <StyledBody>
-      <Header pagination={pagination} fetchNewCards={fetchNewCards} />
+      <Header
+        pagination={pagination}
+        fetchNewCards={fetchNewCards}
+        deleteAll={deleteAll}
+      />
       {pagination === "Main" && (
-        <MainPage cards={cards} onDelete={handleDelete} />
+        <MainPage
+          cards={cards}
+          onDelete={handleDelete}
+          onBookmark={toggleBookmark}
+          bookmarked={bookmarked}
+        />
       )}
       {pagination === "Bookmarks" && (
-        <Bookmarkspage cards={cards} onDelete={handleDelete} />
+        <Bookmarkspage
+          cards={cards}
+          onDelete={handleDelete}
+          onBookmark={toggleBookmark}
+          bookmarked={bookmarked}
+        />
       )}
       {pagination === "NewCards" && (
         <NewCardsPage
           cards={cards}
           onDelete={handleDelete}
           createCustomCard={createCustomCard}
+          onBookmark={toggleBookmark}
+          bookmarked={bookmarked}
         />
       )}
       {pagination === "Profile" && (
-        <ProfilePage toggleDarkMode={toggleDarkMode} darkMode={darkMode} />
+        <ProfilePage
+          toggleDarkMode={toggleDarkMode}
+          darkMode={darkMode}
+          cards={cards}
+          bookmarked={bookmarked}
+        />
       )}
       <Footer onClick={handlePagination} pagination={pagination} />
     </StyledBody>

@@ -11,7 +11,7 @@ const StyledMain = styled.main`
   height: 100%;
 `;
 
-export function MainPage({ cards, onDelete }) {
+export function MainPage({ cards, onDelete, bookmarked, onBookmark }) {
   return (
     <StyledMain>
       {cards.map((card) => (
@@ -21,6 +21,8 @@ export function MainPage({ cards, onDelete }) {
           question={card.question}
           answer={card.answer}
           onDelete={onDelete}
+          bookmarked={bookmarked}
+          onBookmark={onBookmark}
         />
       ))}
     </StyledMain>
