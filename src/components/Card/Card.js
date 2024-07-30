@@ -3,9 +3,11 @@ import bookmark from "../../assets/bookmark.png";
 import bookmarkblack from "../../assets/bookmark-black.png";
 import { Image } from "../Image/Image";
 import { Button } from "../Button/Button";
+import { useState } from "react";
 
 const StyledCard = styled.div`
   position: relative;
+  width: 80%;
   min-width: 400px;
   min-height: 180px;
   background-color: var(--tertiary-color);
@@ -95,19 +97,36 @@ const StyledCard = styled.div`
   }
 `;
 
-export function Card({ question, answer }) {
+export function Card({ question, answer, id, onDelete }) {
+  const [showAnswer, setShowAnswer] = useState(false);
+  const [bookmarked, setBookmark] = useState(false);
+
+  function toggleAnswer() {
+    setShowAnswer(!showAnswer);
+  }
+
+  function toggleBookmark() {
+    setBookmark(!bookmarked);
+  }
+
   return (
     <StyledCard>
       <h2>{question}</h2>
-      <Button className={"answerbutton"}>Show Answer</Button>
-      <h2 className={"answer"}>{answer}</h2>
-      <Image className={"icon"} alt="Bookmarkicon" src={bookmark} />
+      <Button className={"answerbutton"} onClick={toggleAnswer}>
+        {showAnswer ? "Hide Answer" : "Show Answer"}
+      </Button>
+      {showAnswer && <h2 className={"answer"}>{answer}</h2>}
       <Image
-        className={"icon hidden"}
-        alt="Black Bookmarkicon"
-        src={bookmarkblack}
+        className={"icon"}
+        alt={bookmarked ? "Black Bookmark" : "White Bookmark"}
+        src={bookmarked ? bookmarkblack : bookmark}
+        onClick={toggleBookmark}
       />
-      <Button className={"delete-button"} size={"small"}>
+      <Button
+        className={"delete-button"}
+        size={"small"}
+        onClick={() => onDelete(id)}
+      >
         Delete
       </Button>
     </StyledCard>
