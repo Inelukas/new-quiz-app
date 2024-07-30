@@ -54,10 +54,19 @@ export function Body() {
     }
   }
 
+  function handleDelete(cardId) {
+    console.log("toggled");
+    setCards(cards.filter((card) => card.key !== cardId));
+  }
+
+  console.log(cards);
+
   return (
     <StyledBody>
       <Header pagination={pagination} fetchNewCards={fetchNewCards} />
-      {pagination === "Main" && <MainPage cards={cards} />}
+      {pagination === "Main" && (
+        <MainPage cards={cards} onDelete={handleDelete} />
+      )}
       {pagination === "Bookmarks" && <Bookmarkspage />}
       {pagination === "NewCards" && <NewCardsPage />}
       {pagination === "Profile" && (

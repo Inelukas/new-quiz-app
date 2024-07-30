@@ -9,13 +9,14 @@ const StyledImage = styled.img`
   border-radius: 20px;
 `;
 
-export function Image({ src, alt, $showHighlight, className }) {
+export function Image({ src, alt, $showHighlight, className, onClick }) {
   return (
     <StyledImage
       src={src}
       alt={alt}
       $showHighlight={$showHighlight}
       className={className}
+      onClick={onClick}
     />
   );
 }
