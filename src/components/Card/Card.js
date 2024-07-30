@@ -95,12 +95,12 @@ const StyledCard = styled.div`
   }
 `;
 
-export function Card() {
+export function Card({ question, answer }) {
   return (
     <StyledCard>
-      <h2>What is my Name?</h2>
+      <h2>{question}</h2>
       <Button className={"answerbutton"}>Show Answer</Button>
-      <h2 className={"answer"}>Lukas</h2>
+      <h2 className={"answer"}>{answer}</h2>
       <Image className={"icon"} alt="Bookmarkicon" src={bookmark} />
       <Image
         className={"icon hidden"}

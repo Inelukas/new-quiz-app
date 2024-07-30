@@ -11,15 +11,17 @@ const StyledMain = styled.main`
   height: 100%;
 `;
 
-export function MainPage() {
+export function MainPage({ cards }) {
   return (
     <StyledMain>
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
+      {cards.map((card) => (
+        <Card
+          key={card.key}
+          id={card.key}
+          question={card.question}
+          answer={card.answer}
+        />
+      ))}
     </StyledMain>
   );
 }

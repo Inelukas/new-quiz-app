@@ -20,18 +20,24 @@ const StyledHeader = styled.header`
 `;
 
 const StyledFetchButton = styled.div`
+  :hover {
+    transform: scale(1.3);
+  }
+
+  :active {
+    background: var(--tertiary-color);
+  }
+
   display: ${({ $showButton }) => ($showButton ? "block" : "none")};
 `;
 
-const StyledH1 = styled.h1``;
-
-export function Header({ pagination }) {
+export function Header({ pagination, fetchNewCards }) {
   return (
     <StyledHeader>
       <StyledFetchButton $showButton={pagination === "Main"}>
-        <Button>Fetch Cards</Button>
+        <Button onClick={fetchNewCards}>Fetch Cards</Button>
       </StyledFetchButton>
-      <StyledH1>Quiz App</StyledH1>
+      <h1>Quiz App</h1>
       <StyledFetchButton $showButton={pagination === "Main"}>
         <Button>Button 2</Button>
       </StyledFetchButton>
