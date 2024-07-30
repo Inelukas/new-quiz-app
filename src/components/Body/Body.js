@@ -5,7 +5,8 @@ import { MainPage } from "../MainPage/MainPage";
 import { Bookmarkspage } from "../BookmarksPage/Bookmarkspage";
 import { NewCardsPage } from "../NewCardsPage/NewCardsPage";
 import { ProfilePage } from "../ProfilePage/ProfilePage";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { uid } from "uid";
 
 const StyledBody = styled.div`
   display: flex;
@@ -15,6 +16,7 @@ const StyledBody = styled.div`
 export function Body() {
   const [pagination, setPagination] = useState("Main");
   const [darkMode, setDarkMode] = useState(false);
+  const [cards, setCards] = useState([]);
 
   function handlePagination(prop) {
     setPagination(prop);
@@ -32,10 +34,30 @@ export function Body() {
     }
   }, [darkMode]);
 
+  async function fetchNewCards() {
+    try {
+      const response = await fetch(
+        "https://opentdb.com/api.php?amount=5&category=9"
+      );
+      const data = await response.json();
+      const results = data.results;
+      const newCards = results.map((item) => {
+        return {
+          key: uid(),
+          question: item.question,
+          answer: item.correct_answer,
+        };
+      });
+      setCards((prevCards) => [...prevCards, ...newCards]);
+    } catch (error) {
+      console.error("Failed to fetch new cards:", error);
+    }
+  }
+
   return (
     <StyledBody>
-      <Header pagination={pagination} />
-      {pagination === "Main" && <MainPage />}
+      <Header pagination={pagination} fetchNewCards={fetchNewCards} />
+      {pagination === "Main" && <MainPage cards={cards} />}
       {pagination === "Bookmarks" && <Bookmarkspage />}
       {pagination === "NewCards" && <NewCardsPage />}
       {pagination === "Profile" && (
