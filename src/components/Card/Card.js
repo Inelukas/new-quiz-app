@@ -97,18 +97,24 @@ const StyledCard = styled.div`
   }
 `;
 
-export function Card({ question, answer, id, onDelete }) {
+export function Card({
+  question,
+  answer,
+  id,
+  onDelete,
+  onBookmark,
+  bookmarked,
+}) {
   const [showAnswer, setShowAnswer] = useState(false);
-  const [bookmarked, setBookmark] = useState(false);
+  //   const [bookmarked, setBookmark] = useState(false);
 
   function toggleAnswer() {
     setShowAnswer(!showAnswer);
   }
 
-  function toggleBookmark() {
-    setBookmark(!bookmarked);
-  }
-
+  //   function toggleBookmark() {
+  //     setBookmark(!bookmarked);
+  //   }
   return (
     <StyledCard>
       <h2>{question}</h2>
@@ -118,9 +124,9 @@ export function Card({ question, answer, id, onDelete }) {
       {showAnswer && <h2 className={"answer"}>{answer}</h2>}
       <Image
         className={"icon"}
-        alt={bookmarked ? "Black Bookmark" : "White Bookmark"}
-        src={bookmarked ? bookmarkblack : bookmark}
-        onClick={toggleBookmark}
+        alt={bookmarked.includes(id) ? "Black Bookmark" : "White Bookmark"}
+        src={bookmarked.includes(id) ? bookmarkblack : bookmark}
+        onClick={() => onBookmark(id)}
       />
       <Button
         className={"delete-button"}

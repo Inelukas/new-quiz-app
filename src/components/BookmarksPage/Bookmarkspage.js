@@ -11,18 +11,22 @@ const StyledMain = styled.main`
   height: 100%;
 `;
 
-export function Bookmarkspage({ cards, onDelete }) {
+export function Bookmarkspage({ cards, onDelete, bookmarked, onBookmark }) {
   return (
     <StyledMain>
-      {cards.map((card) => (
-        <Card
-          key={card.key}
-          id={card.key}
-          question={card.question}
-          answer={card.answer}
-          onDelete={onDelete}
-        />
-      ))}
+      {cards
+        .filter((card) => bookmarked.includes(card.key))
+        .map((card) => (
+          <Card
+            key={card.key}
+            id={card.key}
+            question={card.question}
+            answer={card.answer}
+            onDelete={onDelete}
+            bookmarked={bookmarked}
+            onBookmark={onBookmark}
+          />
+        ))}
     </StyledMain>
   );
 }

@@ -31,7 +31,7 @@ const StyledFetchButton = styled.div`
   display: ${({ $showButton }) => ($showButton ? "block" : "none")};
 `;
 
-export function Header({ pagination, fetchNewCards }) {
+export function Header({ pagination, fetchNewCards, deleteAll }) {
   return (
     <StyledHeader>
       <StyledFetchButton $showButton={pagination === "Main"}>
@@ -39,7 +39,7 @@ export function Header({ pagination, fetchNewCards }) {
       </StyledFetchButton>
       <h1>Quiz App</h1>
       <StyledFetchButton $showButton={pagination === "Main"}>
-        <Button>Button 2</Button>
+        <Button onClick={deleteAll}>Delete All</Button>
       </StyledFetchButton>
     </StyledHeader>
   );
