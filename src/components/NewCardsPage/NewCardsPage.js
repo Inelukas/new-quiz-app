@@ -30,6 +30,7 @@ export function NewCardsPage({
             id={card.key}
             question={card.question}
             answer={card.answer}
+            hashtag={card.hashtag}
             onDelete={onDelete}
             onBookmark={onBookmark}
             bookmarked={bookmarked}

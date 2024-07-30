@@ -20,6 +20,8 @@ export function MainPage({ cards, onDelete, bookmarked, onBookmark }) {
           id={card.key}
           question={card.question}
           answer={card.answer}
+          hashtag={card.hashtag}
+          wrongAnswers={card.wrongAnswers}
           onDelete={onDelete}
           bookmarked={bookmarked}
           onBookmark={onBookmark}
