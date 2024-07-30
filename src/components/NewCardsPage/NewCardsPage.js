@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Form } from "../Form/Form";
+import { Card } from "../Card/Card";
 
 const StyledMain = styled.main`
   display: flex;
@@ -11,10 +12,21 @@ const StyledMain = styled.main`
   height: 100%;
 `;
 
-export function NewCardsPage() {
+export function NewCardsPage({ createCustomCard, cards, onDelete }) {
   return (
     <StyledMain>
-      <Form />
+      <Form createCustomCard={createCustomCard} />
+      {cards
+        .filter((card) => card.custom)
+        .map((card) => (
+          <Card
+            key={card.key}
+            id={card.key}
+            question={card.question}
+            answer={card.answer}
+            onDelete={onDelete}
+          />
+        ))}
     </StyledMain>
   );
 }

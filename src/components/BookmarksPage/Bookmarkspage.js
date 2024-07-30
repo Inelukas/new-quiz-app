@@ -11,10 +11,18 @@ const StyledMain = styled.main`
   height: 100%;
 `;
 
-export function Bookmarkspage() {
+export function Bookmarkspage({ cards, onDelete }) {
   return (
     <StyledMain>
-      <Card />
+      {cards.map((card) => (
+        <Card
+          key={card.key}
+          id={card.key}
+          question={card.question}
+          answer={card.answer}
+          onDelete={onDelete}
+        />
+      ))}
     </StyledMain>
   );
 }
