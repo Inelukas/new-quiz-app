@@ -16,6 +16,7 @@ const StyledFooter = styled.footer`
   width: 100vw;
   height: 10vh;
   background: var(--secondary-color);
+  box-shadow: 0px -5px var(--text-color);
 `;
 
 export function Footer({ onClick, pagination }) {

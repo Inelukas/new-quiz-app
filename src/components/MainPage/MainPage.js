@@ -8,7 +8,7 @@ const StyledMain = styled.main`
   gap: 20px;
   margin: 12vh 25vw;
   width: 50vw;
-  height: 100vh;
+  height: 100%;
 `;
 
 export function MainPage() {
