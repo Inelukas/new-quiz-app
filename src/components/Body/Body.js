@@ -50,11 +50,13 @@ export function Body() {
       );
       const data = await response.json();
       const results = data.results;
+      console.log(results);
       const newCards = results.map((item) => {
         return {
           key: uid(),
           question: item.question,
           answer: item.correct_answer,
+          wrongAnswers: item.incorrect_answers,
         };
       });
       setCards((prevCards) => [...prevCards, ...newCards]);
@@ -72,11 +74,12 @@ export function Body() {
     setCards(cards.filter((card) => card.key !== cardId));
   }
 
-  function createCustomCard(question, answer) {
+  function createCustomCard(question, answer, hashtag) {
     const newCustomCard = {
       key: uid(),
       question: question,
       answer: answer,
+      hashtag: hashtag,
       custom: true,
     };
     setCards((prevCards) => [...prevCards, newCustomCard]);

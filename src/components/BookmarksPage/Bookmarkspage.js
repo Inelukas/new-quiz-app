@@ -22,6 +22,7 @@ export function Bookmarkspage({ cards, onDelete, bookmarked, onBookmark }) {
             id={card.key}
             question={card.question}
             answer={card.answer}
+            hashtag={card.hashtag}
             onDelete={onDelete}
             bookmarked={bookmarked}
             onBookmark={onBookmark}

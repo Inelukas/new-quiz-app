@@ -3,7 +3,7 @@ import bookmark from "../../assets/bookmark.png";
 import bookmarkblack from "../../assets/bookmark-black.png";
 import { Image } from "../Image/Image";
 import { Button } from "../Button/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const StyledCard = styled.div`
   position: relative;
@@ -69,6 +69,7 @@ const StyledCard = styled.div`
   .hashtags span {
     font-size: 12px;
     margin: 3px;
+    padding: 2px;
     border-radius: 6px;
     background-color: var(--side-color);
     border: none;
@@ -92,6 +93,15 @@ const StyledCard = styled.div`
     background: var(--fetchedcard-color);
   }
 
+  .choices {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 10px 0px;
+    font-size: 16px;
+    text-decoration: underline;
+  }
+
   .hidden {
     display: none;
   }
@@ -100,28 +110,58 @@ const StyledCard = styled.div`
 export function Card({
   question,
   answer,
+  wrongAnswers = [],
+  hashtag,
   id,
   onDelete,
   onBookmark,
   bookmarked,
 }) {
   const [showAnswer, setShowAnswer] = useState(false);
-  //   const [bookmarked, setBookmark] = useState(false);
+  const [shuffledAnswers, setShuffledAnswers] = useState([]);
+
+  useEffect(() => {
+    setShuffledAnswers(shuffleArray([answer, ...wrongAnswers]));
+  }, []);
 
   function toggleAnswer() {
     setShowAnswer(!showAnswer);
   }
 
-  //   function toggleBookmark() {
-  //     setBookmark(!bookmarked);
-  //   }
+  function shuffleArray(array) {
+    return array.sort(() => Math.random() - 0.5);
+  }
+
+  function decodeHtmlEntities(str) {
+    const textArea = document.createElement("textarea");
+    textArea.innerHTML = str;
+    return textArea.value;
+  }
+
+  const hashtagArray = hashtag ? hashtag.split(",") : [];
+
   return (
     <StyledCard>
-      <h2>{question}</h2>
+      <h2>{decodeHtmlEntities(question)}</h2>
+      {wrongAnswers.length > 1 && (
+        <div className={"choices"}>
+          {shuffledAnswers.map((answer, index) => (
+            <p key={index}>
+              {`${index + 1}: `}
+              {decodeHtmlEntities(answer)}
+            </p>
+          ))}
+        </div>
+      )}
       <Button className={"answerbutton"} onClick={toggleAnswer}>
         {showAnswer ? "Hide Answer" : "Show Answer"}
       </Button>
-      {showAnswer && <h2 className={"answer"}>{answer}</h2>}
+      {showAnswer && <h2 className={"answer"}>{[answer]}</h2>}
+      <div className={"hashtags"}>
+        {hashtagArray.map((item, index) => {
+          return <span key={index}>{item.trim()}</span>;
+        })}
+      </div>
       <Image
         className={"icon"}
         alt={bookmarked.includes(id) ? "Black Bookmark" : "White Bookmark"}

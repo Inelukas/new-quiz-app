@@ -63,7 +63,8 @@ export function Form({ createCustomCard }) {
         const form = event.target;
         const question = form.question.value;
         const answer = form.answer.value;
-        createCustomCard(question, answer);
+        const hashtag = form.hashtag.value;
+        createCustomCard(question, answer, hashtag);
         form.reset();
         setCharactersLeft({
           question: 100,
