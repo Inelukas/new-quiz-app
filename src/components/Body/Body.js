@@ -21,6 +21,7 @@ export function Body() {
   const [bookmarked, setBookmark] = useLocalStorageState("bookmarks", {
     defaultValue: [],
   });
+  const [popup, setPopup] = useState(false);
 
   function handlePagination(prop) {
     setPagination(prop);
@@ -71,6 +72,7 @@ export function Body() {
   function deleteAll() {
     setCards([]);
     setBookmark([]);
+    setPopup(!popup);
   }
 
   function handleDelete(cardId) {
@@ -91,13 +93,17 @@ export function Body() {
     setCards((prevCards) => [...prevCards, newCustomCard]);
   }
 
+  function togglePopup() {
+    setPopup(!popup);
+  }
+
   return (
     <StyledBody>
       <Header
         pagination={pagination}
         fetchNewCards={fetchNewCards}
-        deleteAll={deleteAll}
         $darkMode={darkMode}
+        showPopup={togglePopup}
       />
       {pagination === "Main" && (
         <MainPage
@@ -105,6 +111,9 @@ export function Body() {
           onDelete={handleDelete}
           onBookmark={toggleBookmark}
           bookmarked={bookmarked}
+          showPopup={togglePopup}
+          popup={popup}
+          deleteAll={deleteAll}
         />
       )}
       {pagination === "Bookmarks" && (

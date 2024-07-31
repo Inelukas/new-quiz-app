@@ -39,7 +39,8 @@ const StyledCard = styled.div`
     bottom: 2px;
   }
 
-  .answerbutton:active {
+  .answerbutton:active,
+  .delete-button:active {
     background: var(--side-color);
   }
 
@@ -91,10 +92,6 @@ const StyledCard = styled.div`
   .icon:hover {
     transform: scale(1.5);
     transition: 1s;
-  }
-
-  .fetched {
-    background: var(--fetchedcard-color);
   }
 
   .choices {
