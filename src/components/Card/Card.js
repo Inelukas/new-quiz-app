@@ -102,6 +102,12 @@ const StyledCard = styled.div`
     text-decoration: underline;
   }
 
+  .custom {
+    position: absolute;
+    top: 4px;
+    left: 6px;
+  }
+
   .hidden {
     display: none;
   }
@@ -113,6 +119,7 @@ export function Card({
   wrongAnswers = [],
   hashtag,
   id,
+  custom,
   onDelete,
   onBookmark,
   bookmarked,
@@ -156,7 +163,7 @@ export function Card({
       <Button className={"answerbutton"} onClick={toggleAnswer}>
         {showAnswer ? "Hide Answer" : "Show Answer"}
       </Button>
-      {showAnswer && <h2 className={"answer"}>{[answer]}</h2>}
+      {showAnswer && <h2 className={"answer"}>{decodeHtmlEntities(answer)}</h2>}
       <div className={"hashtags"}>
         {hashtagArray.map((item, index) => {
           return <span key={index}>{item.trim()}</span>;
@@ -175,6 +182,7 @@ export function Card({
       >
         Delete
       </Button>
+      {custom && <div className={"custom"}>Custom</div>}
     </StyledCard>
   );
 }

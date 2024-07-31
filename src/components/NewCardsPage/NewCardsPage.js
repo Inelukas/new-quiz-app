@@ -22,7 +22,7 @@ export function NewCardsPage({
   return (
     <StyledMain>
       <Form createCustomCard={createCustomCard} />
-      {cards
+      {JSON.parse(localStorage.getItem("cards"))
         .filter((card) => card.custom)
         .map((card) => (
           <Card
@@ -31,6 +31,8 @@ export function NewCardsPage({
             question={card.question}
             answer={card.answer}
             hashtag={card.hashtag}
+            wrongAnswers={card.wrongAnswers}
+            custom={card.custom}
             onDelete={onDelete}
             onBookmark={onBookmark}
             bookmarked={bookmarked}
