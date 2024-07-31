@@ -22,6 +22,7 @@ export function MainPage({ cards, onDelete, bookmarked, onBookmark }) {
           answer={card.answer}
           hashtag={card.hashtag}
           wrongAnswers={card.wrongAnswers}
+          custom={card.custom}
           onDelete={onDelete}
           bookmarked={bookmarked}
           onBookmark={onBookmark}

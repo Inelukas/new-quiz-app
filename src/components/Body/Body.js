@@ -7,6 +7,7 @@ import { NewCardsPage } from "../NewCardsPage/NewCardsPage";
 import { ProfilePage } from "../ProfilePage/ProfilePage";
 import { useEffect, useState } from "react";
 import { uid } from "uid";
+import useLocalStorageState from "use-local-storage-state";
 
 const StyledBody = styled.div`
   display: flex;
@@ -15,9 +16,11 @@ const StyledBody = styled.div`
 
 export function Body() {
   const [pagination, setPagination] = useState("Main");
-  const [darkMode, setDarkMode] = useState(false);
-  const [cards, setCards] = useState([]);
-  const [bookmarked, setBookmark] = useState([]);
+  const [darkMode, setDarkMode] = useLocalStorageState("dark-mode", false);
+  const [cards, setCards] = useLocalStorageState("cards", { defaultValue: [] });
+  const [bookmarked, setBookmark] = useLocalStorageState("bookmarks", {
+    defaultValue: [],
+  });
 
   function handlePagination(prop) {
     setPagination(prop);
