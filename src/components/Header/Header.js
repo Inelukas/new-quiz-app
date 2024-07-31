@@ -17,6 +17,20 @@ const StyledHeader = styled.header`
   button {
     background: var(--secondary-color);
   }
+
+  h1 {
+    color: ${({ $darkMode }) =>
+      $darkMode ? "var(--text-color)" : "var(--primary-color)"};
+  }
+
+  @media screen and (max-width: 500px) {
+    gap: 5px;
+
+    h1,
+    button {
+      transform: scale(0.7);
+    }
+  }
 `;
 
 const StyledFetchButton = styled.div`
@@ -31,9 +45,9 @@ const StyledFetchButton = styled.div`
   display: ${({ $showButton }) => ($showButton ? "block" : "none")};
 `;
 
-export function Header({ pagination, fetchNewCards, deleteAll }) {
+export function Header({ pagination, fetchNewCards, deleteAll, $darkMode }) {
   return (
-    <StyledHeader>
+    <StyledHeader $darkMode={$darkMode}>
       <StyledFetchButton $showButton={pagination === "Main"}>
         <Button onClick={fetchNewCards}>Fetch Cards</Button>
       </StyledFetchButton>

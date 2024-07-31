@@ -38,6 +38,7 @@ const Counter = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+  min-width: 120px;
   width: 15vw;
   height: 10vh;
   border-radius: 20px;
@@ -49,10 +50,16 @@ const Counter = styled.div`
     width: 50px;
     height: 50px;
     text-align: center;
-    padding-top: 3px;
     background: black;
     color: white;
     border-radius: 90px;
+    position: relative;
+  }
+
+  .card-number span {
+    position: absolute;
+    top: -6px;
+    left: 6px;
   }
 
   h2 {
@@ -66,23 +73,25 @@ const Counter = styled.div`
 
 const Settings = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 1fr 40% 1fr;
   grid-template-rows: 1fr 1fr;
   align-items: center;
   justify-items: center;
   width: 50vw;
+  min-width: 300px;
   height: 20vh;
+  padding: 0px 20px;
   border-radius: 20px;
   background: var(--tertiary-color);
   box-shadow: 5px 5px var(--side-color);
 
   h2 {
-    grid-column: 1;
+    grid-column: 1 / 2;
     grid-row: 1;
   }
 
   h3 {
-    grid-column: 1;
+    grid-column: 1 / 2;
     grid-row: 2;
   }
 `;
@@ -92,7 +101,7 @@ const StyledSwitch = styled.label`
   display: inline-block;
   width: 60px;
   height: 34px;
-  grid-column: 4;
+  grid-column: 3;
   grid-row: 2;
 
   input {
@@ -161,7 +170,9 @@ export function ProfilePage({ toggleDarkMode, darkMode, cards, bookmarked }) {
       </AboutMe>
       <CounterPart>
         <Counter>
-          <h2 className={"card-number"}>?!</h2>
+          <h2 className={"card-number"}>
+            <span>?!</span>
+          </h2>
           <h2>{cards.length}</h2>
         </Counter>
         <Counter>

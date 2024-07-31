@@ -7,13 +7,16 @@ const StyledForm = styled.form`
   display: grid;
   gap: 10px;
   padding: 10px;
-  height: 60vh;
-  min-width: 40vw;
-  margin-top: 5vh;
+  height: 70vh;
+  min-width: 400px;
+  width: 40vw;
+  margin-top: 2vh;
 
   textarea {
     min-height: 30px;
     max-height: 80px;
+    min-width: 370px;
+    max-width: 38vw;
   }
 
   div {
@@ -29,13 +32,29 @@ const StyledForm = styled.form`
   button:hover {
     transform: scale(1.3);
   }
+
+  .form-buttons {
+    display: flex;
+    gap: 30px;
+  }
+
+  button {
+    padding: 2px 5px;
+  }
+
+  @media screen and (max-width: 800px) {
+    transform: scale(0.8);
+    height: 80vh;
+    margin-top: 0vh;
+  }
 `;
 
 export function Form({ createCustomCard }) {
   const [charactersLeft, setCharactersLeft] = useState({
     question: 100,
     answer: 100,
-    hashtag: 50,
+    options: 100,
+    hashtag: 40,
   });
 
   function clearForm(event) {
@@ -44,7 +63,8 @@ export function Form({ createCustomCard }) {
     setCharactersLeft({
       question: 100,
       answer: 100,
-      hashtag: 50,
+      options: 100,
+      hashtag: 40,
     });
   }
 
@@ -63,13 +83,15 @@ export function Form({ createCustomCard }) {
         const form = event.target;
         const question = form.question.value;
         const answer = form.answer.value;
+        const options = form.options.value;
         const hashtag = form.hashtag.value;
-        createCustomCard(question, answer, hashtag);
+        createCustomCard(question, answer, options, hashtag);
         form.reset();
         setCharactersLeft({
           question: 100,
           answer: 100,
-          hashtag: 50,
+          options: 100,
+          hashtag: 40,
         });
       }}
     >
@@ -77,11 +99,11 @@ export function Form({ createCustomCard }) {
       <textarea
         onChange={lengthChecker}
         name="question"
-        rows="4"
+        rows="2"
         type="text"
         maxLength="100"
         required
-      ></textarea>
+      />
       <p>
         <span>{charactersLeft.question}</span> character/s left
       </p>
@@ -89,25 +111,41 @@ export function Form({ createCustomCard }) {
       <textarea
         onChange={lengthChecker}
         name="answer"
-        rows="4"
+        rows="2"
         type="text"
         maxLength="100"
         required
-      ></textarea>
+      />
       <p>
         <span>{charactersLeft.answer}</span> character/s left
       </p>
-      <label htmlFor="hash">Would you like to add some hashtags?</label>
-      <input
+      <label htmlFor="options">
+        You may enter multiple choice options. (optional, separate with commata)
+      </label>
+      <textarea
+        onChange={lengthChecker}
+        name="options"
+        rows="2"
+        type="text"
+        maxLength="100"
+      />
+      <p>
+        <span>{charactersLeft.options}</span> character/s left
+      </p>
+      <label htmlFor="hash">
+        Would you like to add some hashtags? (optional, separate with commata)
+      </label>
+      <textarea
         onChange={lengthChecker}
         type="text"
         name="hashtag"
-        maxLength="50"
+        rows="2"
+        maxLength="40"
       />
       <p>
         <span>{charactersLeft.hashtag}</span> character/s left
       </p>
-      <div>
+      <div className={"form-buttons"}>
         <button type="submit">Submit</button>
         <button onClick={clearForm} type="button">
           Clear
