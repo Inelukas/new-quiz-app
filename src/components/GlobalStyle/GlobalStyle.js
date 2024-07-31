@@ -1,14 +1,14 @@
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
+
   :root {
-    --primary-color: #FFE9D0;
-    --secondary-color: #FFFED3;
-    --tertiary-color: #BBE9FF;
-    --side-color: #B1AFFF;
+    --primary-color: #D1E8E2;
+    --secondary-color: #D9B08C;
+    --tertiary-color: #FFCB9A;
+    --side-color: #116466;
     --text-color: #000000;
-    --text-color-2: #F5E7B2;
-    --hover-color: lightblue;
+    --text-color-2: #2C3531;
     --icon-color: none;
   }
 
@@ -18,11 +18,15 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  
+
   html, body {
     width: 100%;
     height: 100%;
     background: var(--primary-color);
-    color: var(--text-color)
+    color: var(--text-color);
+    font-family: "Literata", serif;
+    font-weight: 400;
   }
 
   .dark-mode {

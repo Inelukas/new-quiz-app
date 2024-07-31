@@ -34,6 +34,11 @@ const StyledCard = styled.div`
     background-color: var(--secondary-color);
   }
 
+  .answerbutton span {
+    position: relative;
+    bottom: 2px;
+  }
+
   .answerbutton:active {
     background: var(--side-color);
   }
@@ -63,7 +68,6 @@ const StyledCard = styled.div`
     position: absolute;
     bottom: 10px;
     left: 10px;
-    max-width: 90%;
   }
 
   .hashtags span {
@@ -95,6 +99,7 @@ const StyledCard = styled.div`
 
   .choices {
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
     margin: 10px 0px;
@@ -110,6 +115,11 @@ const StyledCard = styled.div`
 
   .hidden {
     display: none;
+  }
+
+  @media screen and (max-width: 500px) {
+    transform: scale(0.7);
+    margin: 0px;
   }
 `;
 
@@ -127,9 +137,11 @@ export function Card({
   const [showAnswer, setShowAnswer] = useState(false);
   const [shuffledAnswers, setShuffledAnswers] = useState([]);
 
+  const hashtagArray = hashtag ? hashtag.split(",") : [];
+
   useEffect(() => {
     setShuffledAnswers(shuffleArray([answer, ...wrongAnswers]));
-  }, []);
+  }, [answer, wrongAnswers]);
 
   function toggleAnswer() {
     setShowAnswer(!showAnswer);
@@ -145,8 +157,6 @@ export function Card({
     return textArea.value;
   }
 
-  const hashtagArray = hashtag ? hashtag.split(",") : [];
-
   return (
     <StyledCard>
       <h2>{decodeHtmlEntities(question)}</h2>
@@ -154,14 +164,15 @@ export function Card({
         <div className={"choices"}>
           {shuffledAnswers.map((answer, index) => (
             <p key={index}>
-              {`${index + 1}: `}
+              {`${index + 1}:`}
+              <br />
               {decodeHtmlEntities(answer)}
             </p>
           ))}
         </div>
       )}
       <Button className={"answerbutton"} onClick={toggleAnswer}>
-        {showAnswer ? "Hide Answer" : "Show Answer"}
+        <span>{showAnswer ? "Hide Answer" : "Show Answer"}</span>
       </Button>
       {showAnswer && <h2 className={"answer"}>{decodeHtmlEntities(answer)}</h2>}
       <div className={"hashtags"}>

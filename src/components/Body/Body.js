@@ -77,11 +77,14 @@ export function Body() {
     setCards(cards.filter((card) => card.key !== cardId));
   }
 
-  function createCustomCard(question, answer, hashtag) {
+  function createCustomCard(question, answer, options, hashtag) {
+    const wrongAnswers = options ? options.split(",") : [];
+
     const newCustomCard = {
       key: uid(),
       question: question,
       answer: answer,
+      wrongAnswers: wrongAnswers,
       hashtag: hashtag,
       custom: true,
     };
@@ -94,6 +97,7 @@ export function Body() {
         pagination={pagination}
         fetchNewCards={fetchNewCards}
         deleteAll={deleteAll}
+        $darkMode={darkMode}
       />
       {pagination === "Main" && (
         <MainPage
