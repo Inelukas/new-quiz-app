@@ -153,10 +153,10 @@ export function ProfilePage({ toggleDarkMode, darkMode, cards, bookmarked }) {
     <StyledMain>
       <UpperPart>
         <CatImage src={cat} />
-        <h1>Lukas Klipp</h1>
+        <h1>Mia</h1>
       </UpperPart>
       <AboutMe>
-        <h2>About Me</h2>
+        <h2>About the Creator</h2>
         <p>
           Stare at the wall, play with food and get confused by dust. Chew on
           cable always ensure to lay down in such a manner that tail can lightly

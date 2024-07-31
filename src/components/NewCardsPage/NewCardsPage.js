@@ -18,11 +18,15 @@ export function NewCardsPage({
   onDelete,
   onBookmark,
   bookmarked,
+  hashtagArray,
+  filterByHashtags,
 }) {
+  const displayCards = hashtagArray.length > 0 ? hashtagArray : cards;
+
   return (
     <StyledMain>
       <Form createCustomCard={createCustomCard} />
-      {JSON.parse(localStorage.getItem("cards"))
+      {displayCards
         .filter((card) => card.custom)
         .map((card) => (
           <Card
@@ -36,6 +40,7 @@ export function NewCardsPage({
             onDelete={onDelete}
             onBookmark={onBookmark}
             bookmarked={bookmarked}
+            filterByHashtags={filterByHashtags}
           />
         ))}
     </StyledMain>
