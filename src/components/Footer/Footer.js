@@ -23,27 +23,51 @@ const StyledFooter = styled.footer`
   }
 `;
 
-export function Footer({ onClick, pagination }) {
+export function Footer({ onClick, pagination, clearHashtagArray }) {
   return (
     <StyledFooter>
-      <Button onClick={() => onClick("Main")} size={"footericon"}>
+      <Button
+        onClick={() => {
+          clearHashtagArray();
+          onClick("Main");
+        }}
+        size={"footericon"}
+      >
         <Image src={home} alt={"Main"} $showHighlight={pagination === "Main"} />
       </Button>
-      <Button onClick={() => onClick("Bookmarks")} size={"footericon"}>
+      <Button
+        onClick={() => {
+          clearHashtagArray();
+          onClick("Bookmarks");
+        }}
+        size={"footericon"}
+      >
         <Image
           src={bookmark}
           alt={"Bookmarks"}
           $showHighlight={pagination === "Bookmarks"}
         />
       </Button>
-      <Button onClick={() => onClick("NewCards")} size={"footericon"}>
+      <Button
+        onClick={() => {
+          clearHashtagArray();
+          onClick("NewCards");
+        }}
+        size={"footericon"}
+      >
         <Image
           src={add}
           alt={"Create Cards"}
           $showHighlight={pagination === "NewCards"}
         />
       </Button>
-      <Button onClick={() => onClick("Profile")} size={"footericon"}>
+      <Button
+        onClick={() => {
+          clearHashtagArray();
+          onClick("Profile");
+        }}
+        size={"footericon"}
+      >
         <Image
           src={user}
           alt={"Profile"}

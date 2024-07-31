@@ -80,6 +80,13 @@ const StyledCard = styled.div`
     border: none;
   }
 
+  .hashtags span:hover,
+  .icon:hover,
+  .delete-button:hover,
+  .answerbutton:hover {
+    cursor: pointer;
+  }
+
   .icon {
     width: 50px;
     height: 60px;
@@ -130,6 +137,7 @@ export function Card({
   onDelete,
   onBookmark,
   bookmarked,
+  filterByHashtags,
 }) {
   const [showAnswer, setShowAnswer] = useState(false);
   const [shuffledAnswers, setShuffledAnswers] = useState([]);
@@ -174,7 +182,11 @@ export function Card({
       {showAnswer && <h2 className={"answer"}>{decodeHtmlEntities(answer)}</h2>}
       <div className={"hashtags"}>
         {hashtagArray.map((item, index) => {
-          return <span key={index}>{item.trim()}</span>;
+          return (
+            <span onClick={() => filterByHashtags(item)} key={index}>
+              {item.trim()}
+            </span>
+          );
         })}
       </div>
       <Image

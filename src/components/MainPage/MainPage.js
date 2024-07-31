@@ -50,10 +50,14 @@ export function MainPage({
   showPopup,
   popup,
   deleteAll,
+  filterByHashtags,
+  hashtagArray,
 }) {
+  const displayCards = hashtagArray.length > 0 ? hashtagArray : cards;
+
   return (
     <StyledMain>
-      {cards.map((card) => (
+      {displayCards.map((card) => (
         <Card
           key={card.key}
           id={card.key}
@@ -65,6 +69,7 @@ export function MainPage({
           onDelete={onDelete}
           bookmarked={bookmarked}
           onBookmark={onBookmark}
+          filterByHashtags={filterByHashtags}
         />
       ))}
       {popup && (

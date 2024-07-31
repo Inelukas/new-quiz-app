@@ -22,6 +22,7 @@ export function Body() {
     defaultValue: [],
   });
   const [popup, setPopup] = useState(false);
+  const [hashtagArray, setHashtagArray] = useState([]);
 
   function handlePagination(prop) {
     setPagination(prop);
@@ -97,6 +98,17 @@ export function Body() {
     setPopup(!popup);
   }
 
+  function toggleFilterByHashtags(hashtag) {
+    const filteredArray = cards.filter((card) => {
+      return card.hashtag && card.hashtag.includes(hashtag);
+    });
+    setHashtagArray(filteredArray);
+  }
+
+  function clearHashtagArray() {
+    setHashtagArray([]);
+  }
+
   return (
     <StyledBody>
       <Header
@@ -104,6 +116,7 @@ export function Body() {
         fetchNewCards={fetchNewCards}
         $darkMode={darkMode}
         showPopup={togglePopup}
+        clearHashtagArray={clearHashtagArray}
       />
       {pagination === "Main" && (
         <MainPage
@@ -114,6 +127,8 @@ export function Body() {
           showPopup={togglePopup}
           popup={popup}
           deleteAll={deleteAll}
+          filterByHashtags={toggleFilterByHashtags}
+          hashtagArray={hashtagArray}
         />
       )}
       {pagination === "Bookmarks" && (
@@ -122,6 +137,8 @@ export function Body() {
           onDelete={handleDelete}
           onBookmark={toggleBookmark}
           bookmarked={bookmarked}
+          filterByHashtags={toggleFilterByHashtags}
+          hashtagArray={hashtagArray}
         />
       )}
       {pagination === "NewCards" && (
@@ -131,6 +148,8 @@ export function Body() {
           createCustomCard={createCustomCard}
           onBookmark={toggleBookmark}
           bookmarked={bookmarked}
+          filterByHashtags={toggleFilterByHashtags}
+          hashtagArray={hashtagArray}
         />
       )}
       {pagination === "Profile" && (
@@ -141,7 +160,11 @@ export function Body() {
           bookmarked={bookmarked}
         />
       )}
-      <Footer onClick={handlePagination} pagination={pagination} />
+      <Footer
+        clearHashtagArray={clearHashtagArray}
+        onClick={handlePagination}
+        pagination={pagination}
+      />
     </StyledBody>
   );
 }
