@@ -193,7 +193,7 @@ export function Card({
         className={"icon"}
         alt={bookmarked.includes(id) ? "Black Bookmark" : "White Bookmark"}
         src={bookmarked.includes(id) ? bookmarkblack : bookmark}
-        onClick={() => onBookmark(id)}
+        onBookmark={() => onBookmark(id)}
       />
       <Button
         className={"delete-button"}

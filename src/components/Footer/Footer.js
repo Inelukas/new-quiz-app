@@ -23,13 +23,13 @@ const StyledFooter = styled.footer`
   }
 `;
 
-export function Footer({ onClick, pagination, clearHashtagArray }) {
+export function Footer({ onPagination, pagination, clearHashtagArray }) {
   return (
     <StyledFooter>
       <Button
         onClick={() => {
           clearHashtagArray();
-          onClick("Main");
+          onPagination("Main");
         }}
         size={"footericon"}
       >
@@ -38,7 +38,7 @@ export function Footer({ onClick, pagination, clearHashtagArray }) {
       <Button
         onClick={() => {
           clearHashtagArray();
-          onClick("Bookmarks");
+          onPagination("Bookmarks");
         }}
         size={"footericon"}
       >
@@ -51,7 +51,7 @@ export function Footer({ onClick, pagination, clearHashtagArray }) {
       <Button
         onClick={() => {
           clearHashtagArray();
-          onClick("NewCards");
+          onPagination("NewCards");
         }}
         size={"footericon"}
       >
@@ -64,7 +64,7 @@ export function Footer({ onClick, pagination, clearHashtagArray }) {
       <Button
         onClick={() => {
           clearHashtagArray();
-          onClick("Profile");
+          onPagination("Profile");
         }}
         size={"footericon"}
       >

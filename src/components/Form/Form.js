@@ -1,5 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { Button } from "../Button/Button";
+import { FormTextarea } from "../FormTextarea/FormTextarea";
 
 const StyledForm = styled.form`
   background: var(--tertiary-color);
@@ -87,6 +89,7 @@ export function Form({ createCustomCard }) {
         const hashtag = form.hashtag.value;
         createCustomCard(question, answer, options, hashtag);
         form.reset();
+        form.question.focus();
         setCharactersLeft({
           question: 100,
           answer: 100,
@@ -95,61 +98,38 @@ export function Form({ createCustomCard }) {
         });
       }}
     >
-      <label htmlFor="question">Please enter your question.</label>
-      <textarea
-        onChange={lengthChecker}
+      <FormTextarea
+        children="Please enter your question."
+        lengthChecker={lengthChecker}
         name="question"
-        rows="2"
-        type="text"
-        maxLength="100"
-        required
+        required={true}
+        charactersLeft={charactersLeft.question}
       />
-      <p>
-        <span>{charactersLeft.question}</span> character/s left
-      </p>
-      <label htmlFor="answer">Please enter your answer.</label>
-      <textarea
-        onChange={lengthChecker}
+      <FormTextarea
+        children="Please enter your answer."
+        lengthChecker={lengthChecker}
         name="answer"
-        rows="2"
-        type="text"
-        maxLength="100"
-        required
+        required={true}
+        charactersLeft={charactersLeft.answer}
       />
-      <p>
-        <span>{charactersLeft.answer}</span> character/s left
-      </p>
-      <label htmlFor="options">
-        You may enter multiple choice options. (optional, separate with commata)
-      </label>
-      <textarea
-        onChange={lengthChecker}
+      <FormTextarea
+        children="You may enter multiple choice options. (optional, separate with commata)"
+        lengthChecker={lengthChecker}
         name="options"
-        rows="2"
-        type="text"
-        maxLength="100"
+        charactersLeft={charactersLeft.options}
       />
-      <p>
-        <span>{charactersLeft.options}</span> character/s left
-      </p>
-      <label htmlFor="hash">
-        Would you like to add some hashtags? (optional, separate with commata)
-      </label>
-      <textarea
-        onChange={lengthChecker}
-        type="text"
+      <FormTextarea
+        children="Would you like to add some hashtags? (optional, separate with commata)"
+        lengthChecker={lengthChecker}
         name="hashtag"
-        rows="2"
         maxLength="40"
+        charactersLeft={charactersLeft.hashtag}
       />
-      <p>
-        <span>{charactersLeft.hashtag}</span> character/s left
-      </p>
       <div className={"form-buttons"}>
-        <button type="submit">Submit</button>
-        <button onClick={clearForm} type="button">
+        <Button type="submit">Submit</Button>
+        <Button onClick={clearForm} type="button">
           Clear
-        </button>
+        </Button>
       </div>
     </StyledForm>
   );
