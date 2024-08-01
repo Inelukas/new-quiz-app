@@ -55,7 +55,6 @@ export function Body() {
       );
       const data = await response.json();
       const results = data.results;
-      console.log(results);
       const newCards = results.map((item) => {
         return {
           key: uid(),
@@ -163,7 +162,7 @@ export function Body() {
       )}
       <Footer
         clearHashtagArray={clearHashtagArray}
-        onClick={handlePagination}
+        onPagination={handlePagination}
         pagination={pagination}
       />
     </StyledBody>
