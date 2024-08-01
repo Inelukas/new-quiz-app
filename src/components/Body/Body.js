@@ -74,6 +74,7 @@ export function Body() {
     setCards([]);
     setBookmark([]);
     setPopup(!popup);
+    setHashtagArray([]);
   }
 
   function handleDelete(cardId) {
