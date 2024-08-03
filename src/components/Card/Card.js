@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import bookmark from "../../assets/bookmark.png";
 import bookmarkblack from "../../assets/bookmark-black.png";
+import deleteIcon from "../../assets/delete.png";
 import { Image } from "../Image/Image";
 import { Button } from "../Button/Button";
 import { useEffect, useState } from "react";
@@ -39,8 +40,7 @@ const StyledCard = styled.div`
     bottom: 2px;
   }
 
-  .answerbutton:active,
-  .delete-button:active {
+  .answerbutton:active {
     background: var(--side-color);
   }
 
@@ -48,21 +48,18 @@ const StyledCard = styled.div`
     transform: scale(1.3);
   }
 
-  .delete-button {
+  .delete-icon {
     position: absolute;
-    background-color: var(--secondary-color);
-    bottom: 10px;
-    right: 10px;
-    color: var(--text-color);
-    height: 20px;
-    width: 30px;
-    font-size: 10px;
-    border-radius: 10px;
-    border: none;
+    bottom: 5px;
+    right: 5px;
+    height: 40px;
+    width: 40px;
+    opacity: 0.6;
   }
 
-  .delete-button:hover {
-    transform: scale(1.2);
+  .delete-icon:hover {
+    transform: scale(1.3);
+    opacity: 1;
   }
 
   .hashtags {
@@ -77,6 +74,7 @@ const StyledCard = styled.div`
     padding: 2px;
     border-radius: 6px;
     background-color: var(--side-color);
+    color: #f5e7b2;
     border: none;
   }
 
@@ -193,15 +191,14 @@ export function Card({
         className={"icon"}
         alt={bookmarked.includes(id) ? "Black Bookmark" : "White Bookmark"}
         src={bookmarked.includes(id) ? bookmarkblack : bookmark}
-        onBookmark={() => onBookmark(id)}
+        onClick={() => onBookmark(id)}
       />
-      <Button
-        className={"delete-button"}
-        size={"small"}
+      <Image
+        className={"delete-icon"}
+        alt={"Delete Icon"}
+        src={deleteIcon}
         onClick={() => onDelete(id)}
-      >
-        Delete
-      </Button>
+      />
       {custom && <div className={"custom"}>Custom</div>}
     </StyledCard>
   );
