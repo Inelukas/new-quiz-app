@@ -9,7 +9,7 @@ const StyledForm = styled.form`
   display: grid;
   gap: 10px;
   padding: 10px;
-  height: 70vh;
+  height: 75vh;
   min-width: 400px;
   width: 40vw;
   margin-top: 2vh;
