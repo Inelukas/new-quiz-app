@@ -73,8 +73,8 @@ export function MainPage({
         />
       ))}
       {popup && (
-        <div class="popup hidden">
-          <form class="popup-form">
+        <div className="popup hidden">
+          <form className="popup-form">
             <div>
               <p>Do you really want to delete all cards?</p>
               <div>

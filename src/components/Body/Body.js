@@ -100,7 +100,7 @@ export function Body() {
 
   function toggleFilterByHashtags(hashtag) {
     const filteredArray = cards.filter((card) => {
-      return card.hashtag && card.hashtag.includes(hashtag);
+      return card.hashtag && card.hashtag.includes(hashtag.trim());
     });
     setHashtagArray(filteredArray);
   }
