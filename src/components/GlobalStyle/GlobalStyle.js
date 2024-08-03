@@ -10,6 +10,7 @@ export const GlobalStyle = createGlobalStyle`
     --text-color: #000000;
     --text-color-2: #2C3531;
     --icon-color: none;
+    --custom-image: url("https://www.transparenttextures.com/patterns/always-grey.png")
   }
 
   * {
@@ -23,7 +24,8 @@ export const GlobalStyle = createGlobalStyle`
   html, body {
     width: 100%;
     height: 100%;
-    background: var(--primary-color);
+    background-color: var(--primary-color);
+background-image: var(--custom-image);
     color: var(--text-color);
     font-family: "Literata", serif;
     font-weight: 400;
@@ -37,6 +39,7 @@ export const GlobalStyle = createGlobalStyle`
     --text-color: #F5E7B2;
     --text-color-2: #000000;
     --icon-color: #555555;
+    --custom-image: url("https://www.transparenttextures.com/patterns/back-pattern.png");
   }
 
 `;
